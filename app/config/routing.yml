@@ -1,0 +1,8 @@
+#flat_parcer:
+#    resource: "@FlatParserBundle/Controller/"
+#    type:     annotation
+#    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
