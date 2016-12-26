@@ -42,7 +42,11 @@ abstract class ParserElement
   {
     $this->name   = $name;
     $this->data   = $data;
-    $this->parser = $this->data[self::KEY_PARSER];
+
+    // Not required parameter from config
+    if (isset($this->data[self::KEY_PARSER])) {
+      $this->parser = $this->data[self::KEY_PARSER];
+    }
   }
 
   /**

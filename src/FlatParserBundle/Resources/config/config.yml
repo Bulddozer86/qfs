@@ -1,6 +1,9 @@
 parameters:
     parser_resource:
         real_state:
+             not_found:
+                 parser:
+                     selector: '.row.row-dense'
              step_one:
                  link: http://www.real-estate.lviv.ua/orenda-kvartira/Lviv#orderby_dateins
                  prefix_to_detail: http://www.real-estate.lviv.ua
@@ -11,6 +14,9 @@ parameters:
                      selector: '#search_result a.object-address'
                      attr: href
         olx:
+            not_found:
+                parser:
+                    selector: '#offer_active'
             step_one:
                 link: https://www.olx.ua/uk/nedvizhimost/arenda-kvartir/dolgosrochnaya-arenda-kvartir/lvov/
                 prefix_to_detail: null
