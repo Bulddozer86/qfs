@@ -79,7 +79,5 @@ class ParserCommand extends Command
 
     file_put_contents($rootDir . 'link_source/last_dump.json', json_encode($sourceLink));
     file_put_contents($rootDir . 'link_source/source_links.json', json_encode($newLinks));
-
-    //TODO :: add save to file and checking new objects
   }
 }
