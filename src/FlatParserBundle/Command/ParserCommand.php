@@ -14,7 +14,7 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 class ParserCommand extends Command
 {
-  const NAME = "Flat parser";
+  const NAME = "Source links parser";
 
   public function __construct()
   {
@@ -66,13 +66,23 @@ class ParserCommand extends Command
     foreach ($contents as $name => $html) {
       $element = new SourceLinks($name, $resources[$name]['step_one']);
       $new     = $element->parsing($html);
-      $statistic = array_diff($new, $lastDump[$element->getName()]);
 
-      $newLinks[$element->getName()][] = [
-        'count' => count($statistic),
-        'links' => $statistic,
-        'data'  => date('d.m.Y H:i')
-      ];
+      if ($lastDump) {
+        $statistic = array_diff($new, $lastDump[$element->getName()]);
+
+        $newLinks[$element->getName()][] = [
+          'count' => count($statistic),
+          'links' => $statistic,
+          'data'  => date('d.m.Y H:i')
+        ];
+      } else {
+        $newLinks[$element->getName()][] = [
+          'count' => count($new),
+          'links' => $new,
+          'data'  => date('d.m.Y H:i')
+        ];
+      }
+
 
       $sourceLink[$element->getName()] = $new;
     }

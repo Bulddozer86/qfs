@@ -22,4 +22,5 @@ class PageNotFound extends ParserElement
 
     return $result > 0 ? false : true;
   }
+
 }

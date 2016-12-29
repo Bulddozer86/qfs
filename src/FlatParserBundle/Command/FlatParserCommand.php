@@ -1,8 +1,11 @@
 <?php
 
+
 namespace FlatParserBundle\Command;
 
-use FlatParserBundle\Resources\Classes\PageNotFound;
+use FlatParserBundle\FlatParserBundle;
+use FlatParserBundle\Resources\Classes\Factory\FlatFactory;
+use FlatParserBundle\Resources\Classes\FlatContent;
 use FlatParserBundle\Resources\Classes\SourceLinks;
 use FlatParserBundle\Resources\Services\Downloader;
 use Symfony\Component\Console\Command\Command;
@@ -13,9 +16,9 @@ use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
-class CleanerCommand extends Command
+class FlatParserCommand extends Command
 {
-  const NAME = "Remove not available flats";
+  const NAME = "Flat parser";
 
   public function __construct()
   {
@@ -24,7 +27,7 @@ class CleanerCommand extends Command
 
   protected function configure()
   {
-    $this->setName('cleaner:run');
+    $this->setName('flat:download');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output)
@@ -35,6 +38,10 @@ class CleanerCommand extends Command
     $resources = $this->getApplication()->getKernel()->getContainer()->getParameter('parser_resource');
 
     foreach ($sources as $name => $value) {
+      if ($name == 'olx') {
+        continue;
+      }
+
       foreach ($value as $k => $v) {
         $links = $v['links'];
 
@@ -50,15 +57,26 @@ class CleanerCommand extends Command
         }
 
         foreach ($contents as $hash => $content) {
-          $element = new PageNotFound($name, $resources[$name]['not_found']);
+          $element = FlatFactory::factory($name, $resources[$name]['step_one']);
+          $object  = $element->parsing($content);
 
-          if ($element->parsing($content)) {
-            unset($sources[$name][$k]['links'][$hash]);
+          if (!$object) {
+            continue;
           }
+
+          if (isset($object['images'])) {
+            //$images = Downloader::images($object['images'], $rootDir . 'web/images/');
+
+          }
+
+          $object['phones'] = $element->getPhone($v['links'][$hash]);
+          //var_dump($object);
         }
+
       }
     }
 
-    file_put_contents($rootDir . 'link_source/source_links.json', json_encode($sources));
+    //file_put_contents($rootDir . 'link_source/source_links.json', json_encode($sources));
+
   }
 }
