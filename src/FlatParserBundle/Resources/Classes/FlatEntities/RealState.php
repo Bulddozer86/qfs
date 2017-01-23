@@ -63,8 +63,8 @@ class RealState extends ParserFlatData
       return null;
     }
 
-    $regex = '/\+?[(0-9)][\d-\()-\s+]{5,12}[1-9]/';
-    preg_match_all($regex, $result['message'], $matches);
+    $regex = '/\+?[(0-9)][\d-\()\-\s+]{5,12}[1-9]/';
+    preg_match_all($regex, $result['message'], $matches, PREG_PATTERN_ORDER);
 
     return count($matches[0]) ? $matches[0] : null;
   }

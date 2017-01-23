@@ -1,0 +1,57 @@
+<?php
+
+namespace QFS\DBLogicBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+
+/**
+ * @MongoDB\Document
+ */
+class Flat
+{
+  /**
+   * @MongoDB\Id
+   */
+  protected $id;
+
+  /**
+   * @MongoDB\Field(type="string")
+  */
+  protected $price;
+
+  /**
+   * @MongoDB\Field(type="int")
+   */
+  protected $rooms;
+
+  /**
+   * @MongoDB\Field(type="string")
+   */
+  protected $date;
+
+  /**
+   * @MongoDB\Field(type="date")
+   */
+  protected $headline;
+
+  /**
+   * @MongoDB\Field(type="string")
+   */
+  protected $district;
+
+  /**
+   * @MongoDB\Field(type="string")
+   */
+  protected $resource;
+
+  /**
+   * @MongoDB\Field(type="string")
+   */
+  protected $phones;
+
+  /**
+   * @MongoDB\Field(type="array")
+   */
+  protected $images;
+
+}

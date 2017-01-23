@@ -18,3 +18,4 @@ link_source
 src/AppBundle
 tests
 /web/images/
+.idea

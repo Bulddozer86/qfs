@@ -38,7 +38,7 @@ class FlatParserCommand extends Command
     $resources = $this->getApplication()->getKernel()->getContainer()->getParameter('parser_resource');
 
     foreach ($sources as $name => $value) {
-      if ($name == 'olx') {
+      if ($name == 'real_state') {
         continue;
       }
 
@@ -64,13 +64,14 @@ class FlatParserCommand extends Command
             continue;
           }
 
+          //Downloading images
           if (isset($object['images'])) {
-            //$images = Downloader::images($object['images'], $rootDir . 'web/images/');
-
+            //Downloader::images($object['images'], $rootDir . 'web/images/');
           }
 
           $object['phones'] = $element->getPhone($v['links'][$hash]);
-          //var_dump($object);
+          var_dump($object);
+          die();
         }
 
       }

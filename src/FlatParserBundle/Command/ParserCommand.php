@@ -73,16 +73,15 @@ class ParserCommand extends Command
         $newLinks[$element->getName()][] = [
           'count' => count($statistic),
           'links' => $statistic,
-          'data'  => date('d.m.Y H:i')
+          'data'  => strtotime(date('d.m.Y H:i'))
         ];
       } else {
         $newLinks[$element->getName()][] = [
           'count' => count($new),
           'links' => $new,
-          'data'  => date('d.m.Y H:i')
+          'data'  => strtotime(date('d.m.Y H:i'))
         ];
       }
-
 
       $sourceLink[$element->getName()] = $new;
     }

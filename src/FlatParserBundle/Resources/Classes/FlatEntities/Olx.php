@@ -66,11 +66,11 @@ class Olx extends ParserFlatData
     $response = Downloader::download([$ajaxLink]);
     $result   = json_decode($response[0], true);
 
-    if (!$result) {
+    if (!$result['value']) {
       return null;
     }
 
-    $regex = '/\+?[(0-9)][\d-\()-\s+]{5,12}[1-9]/';
+    $regex = '/\+?[(0-9)][\d-\()\-\s+]{5,12}[1-9]/';
     preg_match_all($regex, $result['value'], $matches);
 
     return $matches[0];
