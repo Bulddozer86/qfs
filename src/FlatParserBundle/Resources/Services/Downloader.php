@@ -68,7 +68,7 @@ class Downloader
     return $result;
   }
 
-  public static function images($data, $path, $options = array()) {
+  public static function images($data, $folder, $options = array()) {
 
     // array of curl handles
     $curly = array();
@@ -82,7 +82,8 @@ class Downloader
     // then add them to the multi-handle
     foreach ($data as $id => $d) {
 
-      $path .= 'image_' . $id . '.jpg';
+      $fileName = '/'. md5($d) . '.jpg';
+      $path     = $folder . $fileName;
 
       if(file_exists($path)) {
         unlink($path);
@@ -94,6 +95,8 @@ class Downloader
       curl_setopt($curly[$id], CURLOPT_FILE, fopen($path, 'x'));
 
       curl_multi_add_handle($mh, $curly[$id]);
+
+      $result[] = $fileName;
     }
 
     // execute the handles
@@ -110,5 +113,7 @@ class Downloader
 
     // all done
     curl_multi_close($mh);
+
+    return $result;
   }
 }

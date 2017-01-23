@@ -8,6 +8,7 @@ use FlatParserBundle\Resources\Classes\Factory\FlatFactory;
 use FlatParserBundle\Resources\Classes\FlatContent;
 use FlatParserBundle\Resources\Classes\SourceLinks;
 use FlatParserBundle\Resources\Services\Downloader;
+use QFS\DBLogicBundle\Document\Flat;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -65,12 +66,34 @@ class FlatParserCommand extends Command
           }
 
           //Downloading images
+          $images = [];
+
           if (isset($object['images'])) {
-            //Downloader::images($object['images'], $rootDir . 'web/images/');
+            $folder = $rootDir . 'web/images/' . $hash;
+
+            if (!file_exists($folder)) {
+              mkdir($folder, 0777, true);
+            }
+
+            $images[$hash] = Downloader::images($object['images'], $folder);
           }
 
           $object['phones'] = $element->getPhone($v['links'][$hash]);
-          var_dump($object);
+          //var_dump($object);
+
+          $flat = new Flat();
+          $flat->setPrice($object['price']);
+          $flat->setRooms($object['rooms']);
+          $flat->setDate($object['date']);
+          $flat->setHeadline($object['headline']);
+          $flat->setDistrict($object['district']);
+          $flat->setResource($object['resource']);
+          $flat->setImages(json_encode($images[$hash]));
+          $flat->setPhones(json_encode($object['phones']));
+
+          $dm = $this->getApplication()->getKernel()->getContainer()->get('doctrine_mongodb')->getManager();
+          $dm->persist($flat);
+          $dm->flush();
           die();
         }
 

@@ -50,7 +50,7 @@ class Flat
   protected $phones;
 
   /**
-   * @MongoDB\Field(type="array")
+   * @MongoDB\Field(type="string")
    */
   protected $images;
 
@@ -222,10 +222,10 @@ class Flat
     /**
      * Set images
      *
-     * @param array $images
+     * @param string $images
      * @return $this
      */
-    public function setImages(array $images)
+    public function setImages($images)
     {
         $this->images = $images;
         return $this;
