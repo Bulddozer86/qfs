@@ -8,6 +8,7 @@ use Doctrine\ODM\MongoDB\Mapping\Driver\AnnotationDriver;
 $loader = require __DIR__.'/../vendor/autoload.php';
 
 AnnotationRegistry::registerLoader([$loader, 'loadClass']);
+
 AnnotationDriver::registerAnnotationClasses();
 
 return $loader;

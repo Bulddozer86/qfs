@@ -94,6 +94,7 @@ class FlatParserCommand extends Command
           $dm = $this->getApplication()->getKernel()->getContainer()->get('doctrine_mongodb')->getManager();
           $dm->persist($flat);
           $dm->flush();
+          var_dump($flat->getId());
           die();
         }
 
