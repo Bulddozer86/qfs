@@ -25,7 +25,7 @@ class Flat
   protected $rooms;
 
   /**
-   * @MongoDB\Field(type="date")
+   * @MongoDB\Field(type="int")
    */
   protected $date;
 
@@ -53,6 +53,11 @@ class Flat
    * @MongoDB\Field(type="string")
    */
   protected $images;
+
+  /**
+   * @MongoDB\Field(type="string")
+   */
+  protected $hash;
 
 
     /**
@@ -112,7 +117,7 @@ class Flat
     /**
      * Set date
      *
-     * @param date $date
+     * @param int
      * @return $this
      */
     public function setDate($date)
@@ -124,7 +129,7 @@ class Flat
     /**
      * Get date
      *
-     * @return string $date
+     * @return int
      */
     public function getDate()
     {
@@ -240,4 +245,22 @@ class Flat
     {
         return $this->images;
     }
+
+  /**
+   * @return mixed
+   */
+  public function getHash()
+  {
+    return $this->hash;
+  }
+
+  /**
+   * @param mixed $hash
+   */
+  public function setHash($hash)
+  {
+    $this->hash = $hash;
+  }
+
+
 }

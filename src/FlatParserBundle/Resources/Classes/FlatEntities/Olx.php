@@ -32,7 +32,7 @@ class Olx extends ParserFlatData
     $data = [
       'price'    => pq('.fright.optionsbar > .pricelabel.tcenter > strong')->text(),
       'rooms'    => $detail[2],
-      'date'     => trim($info[1]),
+      'date'     => strtotime(date('d.m.y H:s:i')),//trim($info[1]),
       'headline' => trim(pq('#offerdescription > div.offer-titlebox > h1')->text()),
       'district' => $locationInfo[2],
       'resource' => $this->getName()
