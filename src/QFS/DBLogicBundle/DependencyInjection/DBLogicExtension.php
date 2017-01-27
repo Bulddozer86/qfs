@@ -1,6 +1,6 @@
 <?php
 
-namespace FlatParserBundle\DependencyInjection;
+namespace QFS\DBLogicBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -12,19 +12,17 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * @link http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class FlatParserExtension extends Extension
+class DBLogicExtension extends Extension
 {
     /**
      * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        var_dump($configs);
-        die();
-//        $configuration = new Configuration();
-//        $config = $this->processConfiguration($configuration, $configs);
-//
-//        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-//        $loader->load('services.yml');
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.yml');
     }
 }

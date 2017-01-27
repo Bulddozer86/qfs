@@ -10,6 +10,7 @@ abstract class ParserElement
   const KEY_PARSER   = 'parser';
   const KEY_SELECTOR = 'selector';
   const KEY_ATTR     = 'attr';
+  const KEY_PHONE    = 'phone_link';
 
   /**
    * Name of source(olx, real estate)
@@ -40,9 +41,13 @@ abstract class ParserElement
   */
   public function __construct($name, array $data)
   {
-    $this->name   = $name;
-    $this->data   = $data;
-    $this->parser = $this->data[self::KEY_PARSER];
+    $this->name = $name;
+    $this->data = $data;
+
+    // Not required parameter from config
+    if (isset($this->data[self::KEY_PARSER])) {
+      $this->parser = $this->data[self::KEY_PARSER];
+    }
   }
 
   /**
@@ -61,6 +66,15 @@ abstract class ParserElement
   protected function attr()
   {
     return $this->parser[self::KEY_ATTR];
+  }
+
+  /**
+   * Getting link on phone
+   * @return string
+  */
+  public function phoneLink()
+  {
+    return $this->data[self::KEY_PHONE];
   }
 
   /**
