@@ -1,3 +1,7 @@
+business_logic:
+    resource: "@BusinessLogicBundle/Resources/config/routing.yml"
+    prefix:   /
+
 db_logic:
     resource: "@DBLogicBundle/Controller/"
     type:     annotation

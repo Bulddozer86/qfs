@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new FlatParserBundle\FlatParserBundle(),
             new QFS\DBLogicBundle\DBLogicBundle(),
+            new QFS\BusinessLogicBundle\BusinessLogicBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
