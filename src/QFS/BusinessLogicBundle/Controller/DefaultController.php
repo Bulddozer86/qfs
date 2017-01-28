@@ -2,11 +2,12 @@
 
 namespace QFS\BusinessLogicBundle\Controller;
 
+use QFS\BusinessLogicBundle\Resources\Classes\GridData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-  const STEP = 3;
+  const STEP = 4;
 
   public function indexAction()
   {
@@ -14,43 +15,31 @@ class DefaultController extends Controller
                   ->getManager()
                   ->getRepository('DBLogicBundle:Flat')
                   ->findBy(['date' => ['$gte' => mktime(date('H') - 12)]]);
-    $colKeys1[] = $c1 = 0;
-    $colKeys2[] = $c2 = 1;
-    $colKeys3[] = $c3 = 2;
 
-    $rows  = round(count($flats) / self::STEP, 0, PHP_ROUND_HALF_UP);
+    $grid = new GridData($flats, self::STEP);
+    $grid->getGridData();
 
-    for($i = 1; $i <= $rows; $i++) {
-      $colKeys1[] = $c1 += self::STEP;
-      $colKeys2[] = $c2 += self::STEP;
-      $colKeys3[] = $c3 += self::STEP;
-    }
-
-    $col1 = [];
-    $col2 = [];
-    $col3 = [];
-
-    foreach ($flats as $k => $v) {
-      if (in_array($k, $colKeys1)) {
-        $col1[] = $v;
-        continue;
-      }
-
-      if (in_array($k, $colKeys2)) {
-        $col2[] = $v;
-        continue;
-      }
-
-      if (in_array($k, $colKeys3)) {
-        $col3[] = $v;
-        continue;
-      }
-    }
+    $backgrounds = [
+      '65, 65, 65',
+      '255, 111, 66',
+      '29, 135, 228',
+      '0, 171, 192',
+      '140, 109, 98',
+      '103, 158, 55',
+      '55, 141, 59',
+      '91, 106, 191',
+      '248, 167, 36',
+      '125, 86, 193',
+      '229, 57, 53',
+      '119, 143, 155',
+      '235, 63, 121',
+      '0, 136, 122'
+    ];
 
     return $this->render('BusinessLogicBundle:Flats:flats.html.twig', [
-      'col1' => $col1,
-      'col2' => $col2,
-      'col3' => $col3
+      'data' => $grid->getGridData(),
+      'column' => 3,
+      'bg' => $backgrounds
     ]);
   }
 }
