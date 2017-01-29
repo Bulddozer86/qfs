@@ -7,19 +7,29 @@
         <div class="col-sm-{{ column }} col-xs-6">
           {% for flat in flats %}
             <div class="panel panel-default flat">
+              <div class="panel-heading">
+                <a href="#" class="pull-right price">{{ flat.price }}</a>
+                <h4>
+                  <span class="date">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    {{ flat.date|date('m.d.Y H:s:i') }}
+                  </span>
+                  {{ flat.district }}
+                </h4>
+              </div>
               <div class="panel-thumbnail">
                 {% if flat.images %}
-                  <img src="images/{{ flat.images.0 }}" class="img-responsive">
+
+                  <img src="{{ flat.images.0 | imagine_filter('flat_preview') }}" class="img-responsive">
                 {% else %}
                   <img src="//placehold.it/450X300/DD3333/EE3333" class="img-responsive">
                 {% endif %}
               </div>
-              <div class="panel-body" style="background-color:rgb({{ random(bg) }});">
+              <div class="panel-body">
                 <div class="resource-logo">
                   <img src="img/{{ flat.resource }}.png" class="{{ flat.resource }}-logo">
                 </div>
-                <h2 class="lead">{{ flat.headline }}</h2>
-                <h3>{{ flat.price }}</h3>
+                <h4 class="lead">{{ flat.headline }}</h4>
               </div>
             </div>
           {% endfor %}

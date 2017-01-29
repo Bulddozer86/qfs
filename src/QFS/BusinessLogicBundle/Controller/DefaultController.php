@@ -38,7 +38,7 @@ class DefaultController extends Controller
 
     return $this->render('BusinessLogicBundle:Flats:flats.html.twig', [
       'data' => $grid->getGridData(),
-      'column' => 3,
+      'column' => $grid->getColumn(),
       'bg' => $backgrounds
     ]);
   }

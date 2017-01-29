@@ -122,22 +122,25 @@ h3,h4,h5 {
 }
 
 .flat .panel-body {
-  color: #ffffff;
-  padding: 15px 10px 10px 10px;
-  position: relative;
+  /*color: #ffffff;*/
+ padding: 20px 15px 15px 15px;
+ position: relative;
 }
 
-.flat .panel-body h2 {
-  font-size: 16px;
-  margin: 0;
+.flat .panel-body h4 {
+ font-size: 14px;
+ margin: 0;
+ border-top: 1px solid #efefef;
+ border-bottom: none;
+ padding-top: 10px;
 }
 
-.flat .panel-body h3 {
- border: none;
- font-size: 22px;
- margin-bottom: 0;
- padding-bottom: 0;
-}
+/*.flat .panel-body h3 {*/
+ /*border: none;*/
+ /*font-size: 22px;*/
+ /*margin-bottom: 0;*/
+ /*padding-bottom: 0;*/
+/*}*/
 
 .flat .panel-thumbnail img {
  width: 100%;
@@ -147,7 +150,7 @@ h3,h4,h5 {
  width: 32px;
  height: auto;
  position: absolute;
- top: -16px;
+ top: -18px;
  right: 0;
 }
 
@@ -155,6 +158,26 @@ h3,h4,h5 {
  width: 70px;
  height: auto;
  position: absolute;
- top: -20px;
+ top: -15px;
  right: 5px;
+}
+
+.panel .panel-heading a.price {
+ font-size: 16px;
+}
+
+.flat .panel-heading .date {
+ font-size: 12px;
+ display: block;
+ padding-bottom: 5px;
+}
+
+.flat .panel-heading .date .fa{
+ position: relative;
+ top: 2px;
+}
+
+.fa {
+ font-size: 18px;
+ padding-right: 5px;
 }

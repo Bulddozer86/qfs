@@ -250,7 +250,7 @@ class Flat
     $images = json_decode($this->images);
 
     foreach ($images as &$image) {
-      $image = $this->hash . '/' . $image;
+      $image = 'images/' . $this->hash . $image;
     }
 
     return $images;

@@ -25,7 +25,8 @@
         "electrolinux/phpquery": "^0.9.6",
         "doctrine/mongodb-odm": "^1.0",
         "doctrine/mongodb-odm-bundle": "^3.0",
-        "alcaeus/mongo-php-adapter": "^1.0"
+        "alcaeus/mongo-php-adapter": "^1.0",
+        "liip/imagine-bundle": "^1.7"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

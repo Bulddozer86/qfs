@@ -6,9 +6,14 @@ class GridData
 {
   
   /**
-   * count of columns by default 
+   * Count of columns by default
   */
   const STEP = 3; 
+
+  /**
+   * Max count of counts in bootstrap grids
+  */
+  const MAX_COUNT_COLUMNS = 12;
 
   /**
    * @var array
@@ -80,8 +85,8 @@ class GridData
     return $this->buildGridData();
   }
 
-  public function getStep()
+  public function getColumn()
   {
-    return $this->step;
+    return round(self::MAX_COUNT_COLUMNS / $this->step, 0, PHP_ROUND_HALF_DOWN);
   }
 }
