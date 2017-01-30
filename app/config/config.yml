@@ -82,3 +82,14 @@ doctrine_mongodb:
     document_managers:
         default:
             auto_mapping: true
+
+liip_imagine:
+    resolvers:
+        default:
+            web_path: ~
+    filter_sets:
+        cache: ~
+        flat_preview:
+            quality: 85
+            filters:
+                thumbnail: { size: [261, 195], mode: outbound }
