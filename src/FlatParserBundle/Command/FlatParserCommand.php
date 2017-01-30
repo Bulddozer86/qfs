@@ -45,9 +45,9 @@ class FlatParserCommand extends Command
     $resources = $this->getApplication()->getKernel()->getContainer()->getParameter('parser_resource');
 
     foreach ($sources as $name => $value) {
-//      if ($name == 'real_state') {
-//        continue;
-//      }
+      if ($name == 'real_state') {
+        continue;
+      }
 
       foreach ($value as $k => $v) {
 
@@ -92,8 +92,8 @@ class FlatParserCommand extends Command
           }
 
           $object['phones'] = $element->getPhone($v['links'][$hash]);
-          //var_dump($object);
-
+          var_dump($object);
+die();
           $flat = new Flat();
           $flat->setPrice($object['price']);
           $flat->setRooms($object['rooms']);

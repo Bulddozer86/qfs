@@ -6,6 +6,7 @@ namespace FlatParserBundle\Resources\Classes\FlatEntities;
 
 use FlatParserBundle\Resources\Classes\ParserFlatData;
 use FlatParserBundle\Resources\Services\Downloader;
+use QFS\BusinessLogicBundle\Resources\Services\Helpers\DateManager;
 
 class Olx extends ParserFlatData
 {
@@ -32,7 +33,7 @@ class Olx extends ParserFlatData
     $data = [
       'price'    => pq('.fright.optionsbar > .pricelabel.tcenter > strong')->text(),
       'rooms'    => $detail[2],
-      'date'     => strtotime(date('d.m.y H:s:i')),//trim($info[1]),
+      'date'     => strtotime($this->getDate(trim($info[1]))),
       'headline' => trim(pq('#offerdescription > div.offer-titlebox > h1')->text()),
       'district' => $locationInfo[2],
       'resource' => $this->getName()
@@ -75,4 +76,13 @@ class Olx extends ParserFlatData
 
     return $matches[0];
   }
+
+  public function getDate($date)
+  {
+    $dateItems = explode(' ', $date);
+    $dateItems[1] = DateManager::getNumberByName(trim($dateItems[1]));
+
+    return implode('.', $dateItems);
+  }
+
 }
