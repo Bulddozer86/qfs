@@ -45,10 +45,12 @@ class FlatParserCommand extends Command
     $resources = $this->getApplication()->getKernel()->getContainer()->getParameter('parser_resource');
 
     foreach ($sources as $name => $value) {
-      if ($name == 'real_state') {
-        continue;
-      }
-
+//      if ($name == 'real_state') {
+//        continue;
+//      }
+//      if ($name == 'olx') {
+//        continue;
+//      }
       foreach ($value as $k => $v) {
 
         $links = $v['links'];
@@ -92,8 +94,7 @@ class FlatParserCommand extends Command
           }
 
           $object['phones'] = $element->getPhone($v['links'][$hash]);
-          var_dump($object);
-die();
+
           $flat = new Flat();
           $flat->setPrice($object['price']);
           $flat->setRooms($object['rooms']);
@@ -101,13 +102,13 @@ die();
           $flat->setHeadline($object['headline']);
           $flat->setDistrict($object['district']);
           $flat->setResource($object['resource']);
+          $flat->setMainData(htmlentities($object['main_data']));
+          $flat->setPhones(json_encode($object['phones']));
+          $flat->setHash($hash);
 
           if (isset($images[$hash])) {
             $flat->setImages(json_encode($images[$hash]));
           }
-
-          $flat->setPhones(json_encode($object['phones']));
-          $flat->setHash($hash);
 
           $dm = $this->getApplication()->getKernel()->getContainer()->get('doctrine_mongodb')->getManager();
           $dm->persist($flat);

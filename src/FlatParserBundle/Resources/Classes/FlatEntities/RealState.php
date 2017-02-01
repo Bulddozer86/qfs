@@ -24,12 +24,14 @@ class RealState extends ParserFlatData
 
     $content  = \phpQuery::newDocumentHTML($html);
     $data     = [
-      'price'    => self::getValue($content->find('li.col-sm-6.col-dense-left:nth-child(1)')->text()),
-      'rooms'    => self::getValue($content->find('li.col-sm-6.col-dense-left:nth-child(2)')->text()),
-      'date'     => strtotime(date('d.m.y H:s:i')),//self::getValue($content->find('li.col-sm-6.col-dense-left:last-child')->prev()->text()),
-      'headline' => pq('h2.h2-under-main-menu')->text(),
-      'district' => trim(pq('div.row.row-dense > div > div.row.row-dense > div > ol > li:nth-child(2)')->text()),
-      'resource' => $this->getName(),
+      'price'     => self::getValue($content->find('li.col-sm-6.col-dense-left:nth-child(1)')->text()),
+      'rooms'     => self::getValue($content->find('li.col-sm-6.col-dense-left:nth-child(2)')->text()),
+      'date'      => strtotime(self::getValue($content->find('li.col-sm-6.col-dense-left:last-child')->prev()->text())),
+      'headline'  => pq('h2.h2-under-main-menu')->text(),
+      'district'  => trim(pq('div.row.row-dense > div > div.row.row-dense > div > ol > li:nth-child(2)')->text()),
+      'resource'  => $this->getName(),
+      'main_data' => trim(pq('body > div:nth-child(3) > div.row.row-dense > div > div:nth-child(2) > div.col-md-8 > div:nth-child(4)')->html())
+                     . trim(pq('body > div:nth-child(3) > div.row.row-dense > div > div:nth-child(2) > div.col-md-8 > div:nth-child(3) > div')->html())
     ];
 
     $links = $content->find('div.fotorama a');

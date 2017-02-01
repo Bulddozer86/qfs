@@ -31,12 +31,13 @@ class Olx extends ParserFlatData
     $locationInfo = explode(',', pq('#offerdescription > div.offer-titlebox > div.offer-titlebox__details > a > strong')->text());
 
     $data = [
-      'price'    => pq('.fright.optionsbar > .pricelabel.tcenter > strong')->text(),
-      'rooms'    => $detail[2],
-      'date'     => strtotime($this->getDate(trim($info[1]))),
-      'headline' => trim(pq('#offerdescription > div.offer-titlebox > h1')->text()),
-      'district' => $locationInfo[2],
-      'resource' => $this->getName()
+      'price'     => pq('.fright.optionsbar > .pricelabel.tcenter > strong')->text(),
+      'rooms'     => $detail[2],
+      'date'      => strtotime($this->getDate(trim($info[1]))),
+      'headline'  => trim(pq('#offerdescription > div.offer-titlebox > h1')->text()),
+      'district'  => $locationInfo[2],
+      'resource'  => $this->getName(),
+      'main_data' => trim(pq('#textContent')->html())
     ];
 
     $links = pq('.photo-glow img.bigImage');

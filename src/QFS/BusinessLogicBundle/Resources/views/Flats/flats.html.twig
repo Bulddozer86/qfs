@@ -1,6 +1,6 @@
 {% extends 'BusinessLogicBundle::layout.html.twig' %}
 
-{% block flats %}
+{% block content %}
   {% if data %}
     <div class="row">
       {% for flats in data %}
@@ -28,7 +28,9 @@
                 <div class="resource-logo">
                   <img src="img/{{ flat.resource }}.png" class="{{ flat.resource }}-logo">
                 </div>
-                <h4 class="lead">{{ flat.headline }}</h4>
+                <h4 class="lead">
+                  <a href="{{ path('detail_page', {'id': flat.hash}) }}">{{ flat.headline }}</a>
+                </h4>
               </div>
             </div>
           {% endfor %}
