@@ -59,6 +59,11 @@ class Flat
    */
   protected $hash;
 
+  /**
+   * @MongoDB\Field(type="string")
+   */
+  protected $main_data;
+
 
   /**
    * Get id
@@ -272,5 +277,20 @@ class Flat
     $this->hash = $hash;
   }
 
+  /**
+   * @return mixed
+   */
+  public function getMainData()
+  {
+    return html_entity_decode($this->main_data);
+  }
+
+  /**
+   * @param mixed $main_data
+   */
+  public function setMainData($main_data)
+  {
+    $this->main_data = $main_data;
+  }
 
 }
