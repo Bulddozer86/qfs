@@ -36,4 +36,8 @@ class DateManager
     return self::$ua_moths[strtolower($name)] ?? null;
   }
 
+  public static function getDateTime()
+  {
+    return strtotime(date('d.m.Y H:s:i'));
+  }
 }

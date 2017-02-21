@@ -4,6 +4,8 @@ namespace FlatParserBundle\Command;
 
 use FlatParserBundle\Resources\Classes\SourceLinks;
 use FlatParserBundle\Resources\Services\Downloader;
+use QFS\BusinessLogicBundle\Resources\Services\Helpers\DateManager;
+use QFS\DBLogicBundle\Document\SourceLink;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -58,35 +60,62 @@ class ParserCommand extends Command
       exit;
     }
 
-    $sourceLink = [];
-    $rootDir    = $this->getApplication()->getKernel()->getRootDir() . '/../';
-    $lastDump   = json_decode(file_get_contents($rootDir . 'link_source/last_dump.json'), true);
-    $newLinks   = json_decode(file_get_contents($rootDir . 'link_source/source_links.json'), true);
+    //$sourceLink = [];
+    //$rootDir    = $this->getApplication()->getKernel()->getRootDir() . '/../';
+    $repository = $this->getApplication()
+                       ->getKernel()
+                       ->getContainer()->get('doctrine_mongodb')
+                       ->getManager()
+                       ->getRepository('DBLogicBundle:SourceLink');
+
+    //$lastDump   = json_decode(file_get_contents($rootDir . 'link_source/last_dump.json'), true);
+    //$newLinks   = json_decode(file_get_contents($rootDir . 'link_source/source_links.json'), true);
 
     foreach ($contents as $name => $html) {
       $element = new SourceLinks($name, $resources[$name]['step_one']);
-      $new     = $element->parsing($html);
+      $links   = $element->parsing($html);
 
-      if ($lastDump) {
-        $statistic = array_diff($new, $lastDump[$element->getName()]);
-
-        $newLinks[$element->getName()][] = [
-          'count' => count($statistic),
-          'links' => $statistic,
-          'data'  => strtotime(date('d.m.Y H:i'))
-        ];
-      } else {
-        $newLinks[$element->getName()][] = [
-          'count' => count($new),
-          'links' => $new,
-          'data'  => strtotime(date('d.m.Y H:i'))
-        ];
+      if (!$links) {
+        continue;
       }
 
-      $sourceLink[$element->getName()] = $new;
+      foreach ($links as $hash => $link) {
+        if ($repository->findOneBy(['hash' => ['$eq' => $hash]])) {
+          continue;
+        }
+
+        $sourceLink = new SourceLink();
+
+        $sourceLink->setResource($element->getName());
+        $sourceLink->setHash($hash);
+        $sourceLink->setLink($link);
+        $sourceLink->setDate(DateManager::getDateTime());
+
+        $dm = $this->getApplication()->getKernel()->getContainer()->get('doctrine_mongodb')->getManager();
+        $dm->persist($sourceLink);
+        $dm->flush();
+      }
+
+//      if ($lastDump) {
+//        $statistic = array_diff($new, $lastDump[$element->getName()]);
+//
+//        $newLinks[$element->getName()][] = [
+//          'count' => count($statistic),
+//          'links' => $statistic,
+//          'data'  => strtotime(date('d.m.Y H:i'))
+//        ];
+//      } else {
+//        $newLinks[$element->getName()][] = [
+//          'count' => count($new),
+//          'links' => $new,
+//          'data'  => strtotime(date('d.m.Y H:i'))
+//        ];
+//      }
+
+//      $sourceLink[$element->getName()] = $new;
     }
 
-    file_put_contents($rootDir . 'link_source/last_dump.json', json_encode($sourceLink));
-    file_put_contents($rootDir . 'link_source/source_links.json', json_encode($newLinks));
+//    file_put_contents($rootDir . 'link_source/last_dump.json', json_encode($sourceLink));
+//    file_put_contents($rootDir . 'link_source/source_links.json', json_encode($newLinks));
   }
 }
