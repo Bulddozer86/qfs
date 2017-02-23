@@ -29,36 +29,49 @@ class CleanerCommand extends Command
 
   protected function execute(InputInterface $input, OutputInterface $output)
   {
-    $rootDir = $this->getApplication()->getKernel()->getRootDir() . '/../';
-    $sources = json_decode(file_get_contents($rootDir . 'link_source/source_links.json'), true);
+    $rootDir    = $this->getApplication()->getKernel()->getRootDir() . '/../';
+    $resources  = $this->getApplication()->getKernel()->getContainer()->getParameter('parser_resource');
+    $repository = $this->getApplication()
+                       ->getKernel()
+                       ->getContainer()->get('doctrine_mongodb')
+                       ->getManager()
+                       ->getRepository('DBLogicBundle:SourceLink');
 
-    $resources = $this->getApplication()->getKernel()->getContainer()->getParameter('parser_resource');
+    $sources = $repository->findAll();
+    var_dump(count($sources));
+    //TODO:: Add logs
+    if (!$sources) {
+      echo 'Empty resource' . PHP_EOL;
+      return null;
+    }
 
-    foreach ($sources as $name => $value) {
-      foreach ($value as $k => $v) {
-        $links = $v['links'];
+    $links = [];
 
-        if (!$links) {
-          continue;
-        }
+    foreach ($sources as $v) {
+      //TODO must be limit for $links
+      $links[$v->getResource()][$v->getHash()] = $v->getLink();
+    }
 
-        $contents = Downloader::download($v['links']);
+    foreach ($resources as $name => $value) {
+      $contents = Downloader::download($links[$name]);
 
-        if (!$contents || !is_array($contents)) {
-          $output->writeln("<error>Response is empty, check links to resource</error>");
-          exit;
-        }
+      if (!$contents || !is_array($contents)) {
+        $output->writeln("<error>{$name} - Response is empty, check links to resource</error>");
+        continue;
+      }
 
-        foreach ($contents as $hash => $content) {
-          $element = new PageNotFound($name, $resources[$name]['not_found']);
+      foreach ($contents as $hash => $content) {
+        $element = new PageNotFound($name, $resources[$name]['not_found']);
 
-          if ($element->parsing($content)) {
-            unset($sources[$name][$k]['links'][$hash]);
-          }
+        if ($element->parsing($content)) {
+          $repository->remove(['hash' => ['$eq' => $hash]]);
+
+          //$dm = $this->getApplication()->getKernel()->getContainer()->get('doctrine_mongodb')->getManager()->getRepository('DBLogicBundle:SourceLink');
+          //$dm->remove()->field('hash')->equals($hash)->getQuery()->execute();
         }
       }
     }
 
-    file_put_contents($rootDir . 'link_source/source_links.json', json_encode($sources));
+    var_dump(count($repository->findAll()));
   }
 }

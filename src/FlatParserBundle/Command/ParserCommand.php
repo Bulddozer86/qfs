@@ -60,16 +60,11 @@ class ParserCommand extends Command
       exit;
     }
 
-    //$sourceLink = [];
-    //$rootDir    = $this->getApplication()->getKernel()->getRootDir() . '/../';
     $repository = $this->getApplication()
                        ->getKernel()
                        ->getContainer()->get('doctrine_mongodb')
                        ->getManager()
                        ->getRepository('DBLogicBundle:SourceLink');
-
-    //$lastDump   = json_decode(file_get_contents($rootDir . 'link_source/last_dump.json'), true);
-    //$newLinks   = json_decode(file_get_contents($rootDir . 'link_source/source_links.json'), true);
 
     foreach ($contents as $name => $html) {
       $element = new SourceLinks($name, $resources[$name]['step_one']);
@@ -96,26 +91,6 @@ class ParserCommand extends Command
         $dm->flush();
       }
 
-//      if ($lastDump) {
-//        $statistic = array_diff($new, $lastDump[$element->getName()]);
-//
-//        $newLinks[$element->getName()][] = [
-//          'count' => count($statistic),
-//          'links' => $statistic,
-//          'data'  => strtotime(date('d.m.Y H:i'))
-//        ];
-//      } else {
-//        $newLinks[$element->getName()][] = [
-//          'count' => count($new),
-//          'links' => $new,
-//          'data'  => strtotime(date('d.m.Y H:i'))
-//        ];
-//      }
-
-//      $sourceLink[$element->getName()] = $new;
     }
-
-//    file_put_contents($rootDir . 'link_source/last_dump.json', json_encode($sourceLink));
-//    file_put_contents($rootDir . 'link_source/source_links.json', json_encode($newLinks));
   }
 }
