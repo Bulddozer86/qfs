@@ -29,7 +29,6 @@ class CleanerCommand extends Command
 
   protected function execute(InputInterface $input, OutputInterface $output)
   {
-    $rootDir    = $this->getApplication()->getKernel()->getRootDir() . '/../';
     $resources  = $this->getApplication()->getKernel()->getContainer()->getParameter('parser_resource');
     $repository = $this->getApplication()
                        ->getKernel()
@@ -38,7 +37,7 @@ class CleanerCommand extends Command
                        ->getRepository('DBLogicBundle:SourceLink');
 
     $sources = $repository->findAll();
-    var_dump(count($sources));
+
     //TODO:: Add logs
     if (!$sources) {
       echo 'Empty resource' . PHP_EOL;
@@ -64,14 +63,14 @@ class CleanerCommand extends Command
         $element = new PageNotFound($name, $resources[$name]['not_found']);
 
         if ($element->parsing($content)) {
-          $repository->remove(['hash' => ['$eq' => $hash]]);
+          $sourceLink = $repository->findOneByHash($hash);
 
-          //$dm = $this->getApplication()->getKernel()->getContainer()->get('doctrine_mongodb')->getManager()->getRepository('DBLogicBundle:SourceLink');
-          //$dm->remove()->field('hash')->equals($hash)->getQuery()->execute();
+          $dm = $this->getApplication()->getKernel()->getContainer()->get('doctrine_mongodb')->getManager();
+          $dm->remove($sourceLink);
+          $dm->flush();
         }
       }
     }
-
-    var_dump(count($repository->findAll()));
   }
+  
 }
