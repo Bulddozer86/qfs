@@ -85,6 +85,7 @@ class ParserCommand extends Command
         $sourceLink->setHash($hash);
         $sourceLink->setLink($link);
         $sourceLink->setDate(DateManager::getDateTime());
+        $sourceLink->setIsAdded(false);
 
         $dm = $this->getApplication()->getKernel()->getContainer()->get('doctrine_mongodb')->getManager();
         $dm->persist($sourceLink);

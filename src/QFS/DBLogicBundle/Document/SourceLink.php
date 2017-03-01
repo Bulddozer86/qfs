@@ -42,6 +42,11 @@ class SourceLink
   protected $is_delete;
 
   /**
+   * @MongoDB\Field(type="bool")
+   */
+  protected $is_added;
+
+  /**
    * @return mixed
    */
   public function getResource()
@@ -121,14 +126,30 @@ class SourceLink
     $this->is_delete = $is_delete;
   }
 
+  /**
+   * @return mixed
+   */
+  public function isAdded()
+  {
+    return $this->is_added;
+  }
 
-    /**
-     * Get id
-     *
-     * @return id $id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+  /**
+   * @param mixed $is_added
+   */
+  public function setIsAdded($is_added)
+  {
+    $this->is_added = $is_added;
+  }
+
+  /**
+   * Get id
+   *
+   * @return id $id
+   */
+  public function getId()
+  {
+      return $this->id;
+  }
+
 }

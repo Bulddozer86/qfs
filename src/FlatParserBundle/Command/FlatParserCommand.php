@@ -33,97 +33,99 @@ class FlatParserCommand extends Command
 
   protected function execute(InputInterface $input, OutputInterface $output)
   {
-    $repository = $this->getApplication()
-                       ->getKernel()
-                       ->getContainer()->get('doctrine_mongodb')
-                       ->getManager()
-                       ->getRepository('DBLogicBundle:Flat');
+    $sourceLinks = $this->getApplication()
+                        ->getKernel()
+                        ->getContainer()->get('doctrine_mongodb')
+                        ->getManager()
+                        ->getRepository('DBLogicBundle:SourceLink');
 
     $rootDir = $this->getApplication()->getKernel()->getRootDir() . '/../';
-    $sources = json_decode(file_get_contents($rootDir . 'link_source/source_links.json'), true);
+    $sources = $sourceLinks->findBy(['is_added' => ['$eq' => false]]);
+
+    if (!$sources) {
+      //TODO:: add to logs
+      echo 'No data for insert';
+      exit();
+    }
+
+    foreach ($sources as $v) {
+      $data[$v->getResource()][$v->getHash()] = $v->getLink();
+    }
 
     $resources = $this->getApplication()->getKernel()->getContainer()->getParameter('parser_resource');
 
-    foreach ($sources as $name => $value) {
+    foreach ($data as $name => $links) {
 //      if ($name == 'real_state') {
 //        continue;
 //      }
 //      if ($name == 'olx') {
 //        continue;
 //      }
-      foreach ($value as $k => $v) {
 
-        $links = $v['links'];
+      $contents = Downloader::download($links);
 
-        if (!$links) {
+      if (!$contents || !is_array($contents)) {
+        $output->writeln("<error>Response is empty, check links to resource</error>");
+        exit;
+      }
+
+      foreach ($contents as $hash => $content) {
+        $link = $sourceLinks->findOneBy(['hash' => $hash]);
+
+        if ($link->isAdded()) {
           continue;
         }
 
-        $contents = Downloader::download($v['links']);
+        $element = FlatFactory::factory($name, $resources[$name]['step_one']);
+        $object  = $element->parsing($content);
 
-        if (!$contents || !is_array($contents)) {
-          $output->writeln("<error>Response is empty, check links to resource</error>");
-          exit;
+        if (!$object) {
+          continue;
         }
 
-        foreach ($contents as $hash => $content) {
-          $isSaved = $repository->findBy(['hash' => $hash]);
+        //Downloading images
+        $images = [];
 
-          if ($isSaved) {
-            continue;
+        if (isset($object['images'])) {
+          $folder = $rootDir . 'web/images/' . $hash;
+
+          if (!file_exists($folder)) {
+            mkdir($folder, 0777, true);
           }
 
-          $element = FlatFactory::factory($name, $resources[$name]['step_one']);
-          $object  = $element->parsing($content);
+          $images[$hash] = Downloader::images($object['images'], $folder);
+        }
 
-          if (!$object) {
-            continue;
-          }
+        $object['phones'] = $element->getPhone($links[$hash]);
 
-          //Downloading images
-          $images = [];
+        $flat = new Flat();
+        $flat->setPrice($object['price']);
+        $flat->setRooms($object['rooms']);
+        $flat->setDate($object['date']);
+        $flat->setHeadline($object['headline']);
+        $flat->setDistrict($object['district']);
+        $flat->setResource($object['resource']);
+        $flat->setMainData(htmlentities($object['main_data']));
+        $flat->setPhones(json_encode($object['phones']));
+        $flat->setHash($hash);
 
-          if (isset($object['images'])) {
-            $folder = $rootDir . 'web/images/' . $hash;
+        if (isset($images[$hash])) {
+          $flat->setImages(json_encode($images[$hash]));
+        }
 
-            if (!file_exists($folder)) {
-              mkdir($folder, 0777, true);
-            }
+        $dm = $this->getApplication()->getKernel()->getContainer()->get('doctrine_mongodb')->getManager();
+        $dm->persist($flat);
+        $dm->flush();
 
-            $images[$hash] = Downloader::images($object['images'], $folder);
-          }
+        if ($flat->getId()) {
+          $link->setIsAdded(true);
 
-          $object['phones'] = $element->getPhone($v['links'][$hash]);
-
-          $flat = new Flat();
-          $flat->setPrice($object['price']);
-          $flat->setRooms($object['rooms']);
-          $flat->setDate($object['date']);
-          $flat->setHeadline($object['headline']);
-          $flat->setDistrict($object['district']);
-          $flat->setResource($object['resource']);
-          $flat->setMainData(htmlentities($object['main_data']));
-          $flat->setPhones(json_encode($object['phones']));
-          $flat->setHash($hash);
-
-          if (isset($images[$hash])) {
-            $flat->setImages(json_encode($images[$hash]));
-          }
-
-          $dm = $this->getApplication()->getKernel()->getContainer()->get('doctrine_mongodb')->getManager();
-          $dm->persist($flat);
+          $dm->persist($link);
           $dm->flush();
-
-          if ($flat->getId()) {
-            unset($sources[$name][$k]['links'][$hash]);
-          }
         }
-
-        $sources[$name][$k]['count'] = count($sources[$name][$k]['links']);
       }
     }
 
-    file_put_contents($rootDir . 'link_source/source_links.json', json_encode($sources));
 
   }
 }

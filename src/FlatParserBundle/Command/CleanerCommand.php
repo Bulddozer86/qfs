@@ -72,5 +72,5 @@ class CleanerCommand extends Command
       }
     }
   }
-  
+
 }
