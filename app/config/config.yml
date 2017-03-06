@@ -90,6 +90,6 @@ liip_imagine:
     filter_sets:
         cache: ~
         flat_preview:
-            quality: 85
+            quality: 90
             filters:
-                thumbnail: { size: [261, 195], mode: outbound }
+                thumbnail: { size: [360, 270], mode: outbound }

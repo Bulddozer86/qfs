@@ -59,6 +59,7 @@ textarea {
 }
 .panel .panel-thumbnail {
  padding:0;
+ border-bottom: 2px solid #1b2835;
 }
 .panel .img-circle {
  width:50px;
@@ -122,19 +123,21 @@ h3,h4,h5 {
 }
 
 .flat .panel-body {
-  /*color: #ffffff;*/
- padding: 20px 15px 15px 15px;
+ color: #ffffff;
+ padding: 0;
  position: relative;
 }
 
 .flat .panel-body h4 {
- font-size: 14px;
+ font-size: 16px;
  margin: 0;
- border-top: 1px solid #efefef;
+ padding: 0;
  border-bottom: none;
- padding-top: 10px;
 }
 
+.flat .panel-body h4 a {
+ color: rgb(65, 65, 65);
+}
 /*.flat .panel-body h3 {*/
  /*border: none;*/
  /*font-size: 22px;*/
@@ -180,4 +183,35 @@ h3,h4,h5 {
 .fa {
  font-size: 18px;
  padding-right: 5px;
+}
+
+.short-info {
+ background: #1b2835;
+}
+
+.short-info-items {
+ padding-left: 0;
+ list-style: none;
+ margin-bottom: 0;
+}
+
+.short-info-items li {
+ float: left;
+ padding: 10px 15px;
+}
+
+.short-info-items li.rooms {
+ background: url("/img/rooms.png");
+ background-repeat: no-repeat;
+ padding-left: 28px;
+ padding-top: 11px;
+ background-position-y: 11px;
+}
+
+.short-info-items li.price {
+ background-color:rgb(29, 135, 228);
+}
+
+.short-text {
+ padding: 20px 15px;
 }

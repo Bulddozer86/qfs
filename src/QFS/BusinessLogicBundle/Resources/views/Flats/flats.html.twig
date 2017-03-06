@@ -6,17 +6,8 @@
       {% for flats in data %}
         <div class="col-sm-{{ column }} col-xs-6">
           {% for flat in flats %}
+            {#{{ dump(flat) }}#}
             <div class="panel panel-default flat">
-              <div class="panel-heading">
-                <a href="#" class="pull-right price">{{ flat.price }}</a>
-                <h4>
-                  <span class="date">
-                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                    {{ flat.date|date('m.d.Y H:s:i') }}
-                  </span>
-                  {{ flat.district }}
-                </h4>
-              </div>
               <div class="panel-thumbnail">
                 {% if flat.images %}
                   <img src="{{ flat.images.0 | imagine_filter('flat_preview') }}" class="img-responsive">
@@ -28,9 +19,26 @@
                 <div class="resource-logo">
                   <img src="img/{{ flat.resource }}.png" class="{{ flat.resource }}-logo">
                 </div>
-                <h4 class="lead">
-                  <a href="{{ path('detail_page', {'id': flat.hash}) }}">{{ flat.headline }}</a>
-                </h4>
+                <div class="short-text">
+                  <h4>
+                    <a href="{{ path('detail_page', {'id': flat.hash}) }}">{{ flat.headline }}</a>
+                  </h4>
+                </div>
+                <div class="short-info">
+                  <ul class="short-info-items clearfix">
+                    <li class="date">
+                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                      {{ flat.date|date('m.d.Y') }}
+                    </li>
+                    <li class="rooms">
+                      {{ flat.rooms }}
+                    </li>
+                    <li class="price pull-right">
+                      <i class="fa fa-money" aria-hidden="true"></i>
+                      {{ flat.price }}
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           {% endfor %}

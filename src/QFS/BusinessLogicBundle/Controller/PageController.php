@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class PageController extends Controller
 {
-  const STEP = 4;
+  const STEP = 3;
 
   public function indexAction()
   {
