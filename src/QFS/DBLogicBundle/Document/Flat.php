@@ -5,7 +5,7 @@ namespace QFS\DBLogicBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
- * @MongoDB\Document
+ * @MongoDB\Document(repositoryClass="QFS\DBLogicBundle\Repository\FlatRepository")
  */
 class Flat
 {
