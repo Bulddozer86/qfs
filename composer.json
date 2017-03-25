@@ -27,7 +27,8 @@
         "doctrine/mongodb-odm-bundle": "^3.0",
         "alcaeus/mongo-php-adapter": "^1.0",
         "liip/imagine-bundle": "^1.7",
-        "mongodb/mongodb": "^1.1"
+        "mongodb/mongodb": "^1.1",
+        "friendsofsymfony/elastica-bundle": "^3.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

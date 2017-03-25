@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new FlatParserBundle\FlatParserBundle(),
             new QFS\DBLogicBundle\DBLogicBundle(),
             new QFS\BusinessLogicBundle\BusinessLogicBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
             //new Liip\ImagineBundle\LiipImagineBundle(),
         ];
 

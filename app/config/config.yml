@@ -93,3 +93,25 @@ liip_imagine:
             quality: 85
             filters:
                 thumbnail: { size: [261, 195], mode: outbound }
+fos_elastica:
+    clients:
+            default: { host: localhost, port: 9200 }
+    indexes:
+        qfs:
+            types:
+                flat:
+                    mappings:
+                        price: ~
+                        resource: ~
+                        rooms: ~
+                        date: ~
+                        headline: ~
+                        district: ~
+                        main_data: ~
+                    persistence:
+                        driver: mongodb
+                        model: QFS\DBLogicBundle\Document\Flat
+                        provider: ~
+                        listener:
+                            immediate: ~
+                        finder: ~
