@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
-
 class PageController extends FOSRestController implements ClassResourceInterface
 {
     const STEP = 4;
@@ -34,11 +33,19 @@ class PageController extends FOSRestController implements ClassResourceInterface
      */
     public function indexAction()
     {
-        return [1 => "hello", 2 => "world"];
+//        $repositoryManager = $this->container->get('fos_elastica.manager');
+//
+//        /** var FOS\ElasticaBundle\Repository */
+//        $repository = $repositoryManager->getRepository('DBLogicBundle:Flat');
+//
+//        /** var array of Acme\UserBundle\Entity\User */
+//        $users = $repository->find('Ставова');
+//        var_dump($users);
+//        die();
         $flats = $this->get('doctrine_mongodb')
           ->getManager()
           ->getRepository('DBLogicBundle:Flat')
-          ->findBy(['date' => ['$gte' => mktime(date('H') - 48)]]);
+          ->findLatestItems();
 
         $grid = new GridData($flats, self::STEP);
         $grid->getGridData();
@@ -51,14 +58,15 @@ class PageController extends FOSRestController implements ClassResourceInterface
           ]
         );
     }
-//
-//  public function detailAction($id)
-//  {
-//    $flat = $this->get('doctrine_mongodb')
-//      ->getManager()
-//      ->getRepository('DBLogicBundle:Flat')
-//      ->findOneBy(['hash' => ['$eq' => $id]]);
-//
-//    return $this->render('BusinessLogicBundle:Flats:detail.html.twig', ['flat' => $flat]);
-//  }
+
+    public function detailAction($id)
+    {
+        $flat = $this->get('doctrine_mongodb')
+          ->getManager()
+          ->getRepository('DBLogicBundle:Flat')
+          ->findByHash($id);
+
+        return $this->render('BusinessLogicBundle:Flats:detail.html.twig', ['flat' => $flat]);
+    }
+
 }

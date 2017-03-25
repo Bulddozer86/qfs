@@ -125,7 +125,5 @@ class FlatParserCommand extends Command
         }
       }
     }
-
-
   }
 }

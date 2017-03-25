@@ -23,7 +23,7 @@ class AppKernel extends Kernel
           new Nelmio\CorsBundle\NelmioCorsBundle(),
           new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
           new JMS\SerializerBundle\JMSSerializerBundle(),
-            //new Liip\ImagineBundle\LiipImagineBundle(),
+          //new Liip\ImagineBundle\LiipImagineBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

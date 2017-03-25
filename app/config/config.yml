@@ -141,3 +141,28 @@ fos_rest:
             - { path: ^/, priorities: [ json, jsonp ], fallback_format: ~, prefer_extension: true }
     exception:
         enabled: true
+
+# FOS Elastic
+fos_elastica:
+    clients:
+            default: { host: localhost, port: 9200 }
+    indexes:
+        qfs:
+            types:
+                flat:
+                    mappings:
+                        price: ~
+                        resource: ~
+                        rooms: ~
+                        date: ~
+                        headline: ~
+                        district: ~
+                        main_data: ~
+                    persistence:
+                        driver: mongodb
+                        model: QFS\DBLogicBundle\Document\Flat
+                        provider: ~
+                        listener:
+                            immediate: ~
+                        finder: ~
+
