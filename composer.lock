@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c4a3beba81f80697276105572f05510a",
+    "content-hash": "b035644a87c74d499448d8b3c6778dee",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1113,7 +1113,90 @@
             "time": "2013-03-21T12:39:33+00:00"
         },
         {
-<<<<<<< HEAD
+            "name": "friendsofsymfony/elastica-bundle",
+            "version": "3.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSElasticaBundle.git",
+                "reference": "488d5884dbdfb4545598c6bb257f4afc902bded5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/488d5884dbdfb4545598c6bb257f4afc902bded5",
+                "reference": "488d5884dbdfb4545598c6bb257f4afc902bded5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "psr/log": "~1.0",
+                "ruflin/elastica": "~2.1",
+                "symfony/console": "~2.1|~3.0",
+                "symfony/form": "~2.1|~3.0",
+                "symfony/framework-bundle": "~2.3|~3.0",
+                "symfony/property-access": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "~1.2",
+                "doctrine/orm": "~2.4",
+                "doctrine/phpcr-bundle": "~1.2",
+                "jackalope/jackalope-doctrine-dbal": "~1.1",
+                "jms/serializer-bundle": "@stable",
+                "knplabs/knp-components": "~1.2",
+                "knplabs/knp-paginator-bundle": "~2.4",
+                "pagerfanta/pagerfanta": "~1.0",
+                "phpunit/phpunit": "~4.1",
+                "propel/propel1": "1.6.*",
+                "symfony/browser-kit": "~2.3|~3.0",
+                "symfony/expression-language": "~2.4|~3.0",
+                "symfony/serializer": "~2.7|~3.0",
+                "symfony/twig-bundle": "~2.3|~3.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FOS\\ElasticaBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tim Nagel",
+                    "email": "tim@nagel.com.au"
+                },
+                {
+                    "name": "Richard Miller",
+                    "email": "richard.miller@limethinking.co.uk"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/FriendsOfSymfony/FOSElasticaBundle/contributors"
+                },
+                {
+                    "name": "Jeremy Mikola",
+                    "email": "jmikola@gmail.com"
+                }
+            ],
+            "description": "Elasticsearch PHP integration for your Symfony2 project using Elastica",
+            "homepage": "https://github.com/FriendsOfSymfony/FOSElasticaBundle",
+            "keywords": [
+                "doctrine2",
+                "elastica",
+                "elasticsearch",
+                "mongodb",
+                "propel",
+                "search"
+            ],
+            "time": "2017-01-26T14:50:52+00:00"
+        },
+        {
             "name": "friendsofsymfony/rest-bundle",
             "version": "1.7.7",
             "target-dir": "FOS/RestBundle",
@@ -1162,64 +1245,16 @@
                 "sensio/framework-extra-bundle": "Add support for route annotations and the view response listener, requires ~3.0",
                 "symfony/serializer": "Add support for basic serialization capabilities and xml decoding, requires ~2.3",
                 "symfony/validator": "Add support for validation capabilities in the ParamFetcher, requires ~2.3"
-=======
-            "name": "friendsofsymfony/elastica-bundle",
-            "version": "3.2.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FriendsOfSymfony/FOSElasticaBundle.git",
-                "reference": "488d5884dbdfb4545598c6bb257f4afc902bded5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/488d5884dbdfb4545598c6bb257f4afc902bded5",
-                "reference": "488d5884dbdfb4545598c6bb257f4afc902bded5",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "psr/log": "~1.0",
-                "ruflin/elastica": "~2.1",
-                "symfony/console": "~2.1|~3.0",
-                "symfony/form": "~2.1|~3.0",
-                "symfony/framework-bundle": "~2.3|~3.0",
-                "symfony/property-access": "~2.3|~3.0"
-            },
-            "require-dev": {
-                "doctrine/doctrine-bundle": "~1.2",
-                "doctrine/orm": "~2.4",
-                "doctrine/phpcr-bundle": "~1.2",
-                "jackalope/jackalope-doctrine-dbal": "~1.1",
-                "jms/serializer-bundle": "@stable",
-                "knplabs/knp-components": "~1.2",
-                "knplabs/knp-paginator-bundle": "~2.4",
-                "pagerfanta/pagerfanta": "~1.0",
-                "phpunit/phpunit": "~4.1",
-                "propel/propel1": "1.6.*",
-                "symfony/browser-kit": "~2.3|~3.0",
-                "symfony/expression-language": "~2.4|~3.0",
-                "symfony/serializer": "~2.7|~3.0",
-                "symfony/twig-bundle": "~2.3|~3.0"
->>>>>>> origin/feature-add-elastic
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-<<<<<<< HEAD
                     "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
                 "psr-0": {
                     "FOS\\RestBundle": ""
-=======
-                    "dev-master": "3.2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "FOS\\ElasticaBundle\\": ""
->>>>>>> origin/feature-add-elastic
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1228,7 +1263,6 @@
             ],
             "authors": [
                 {
-<<<<<<< HEAD
                     "name": "Lukas Kahwe Smith",
                     "email": "smith@pooteeweet.org"
                 },
@@ -1295,35 +1329,6 @@
                 "fixtures"
             ],
             "time": "2016-04-29T12:21:54+00:00"
-=======
-                    "name": "Tim Nagel",
-                    "email": "tim@nagel.com.au"
-                },
-                {
-                    "name": "Richard Miller",
-                    "email": "richard.miller@limethinking.co.uk"
-                },
-                {
-                    "name": "FriendsOfSymfony Community",
-                    "homepage": "https://github.com/FriendsOfSymfony/FOSElasticaBundle/contributors"
-                },
-                {
-                    "name": "Jeremy Mikola",
-                    "email": "jmikola@gmail.com"
-                }
-            ],
-            "description": "Elasticsearch PHP integration for your Symfony2 project using Elastica",
-            "homepage": "https://github.com/FriendsOfSymfony/FOSElasticaBundle",
-            "keywords": [
-                "doctrine2",
-                "elastica",
-                "elasticsearch",
-                "mongodb",
-                "propel",
-                "search"
-            ],
-            "time": "2017-01-26T14:50:52+00:00"
->>>>>>> origin/feature-add-elastic
         },
         {
             "name": "imagine/imagine",
@@ -1482,7 +1487,6 @@
                 "sql"
             ],
             "time": "2014-01-12T16:20:24+00:00"
-<<<<<<< HEAD
         },
         {
             "name": "jms/metadata",
@@ -1720,8 +1724,6 @@
                 "xml"
             ],
             "time": "2017-03-13T17:02:39+00:00"
-=======
->>>>>>> origin/feature-add-elastic
         },
         {
             "name": "liip/imagine-bundle",
@@ -1822,7 +1824,6 @@
                 "transformation"
             ],
             "time": "2017-03-02T20:18:55+00:00"
-<<<<<<< HEAD
         },
         {
             "name": "michelf/php-markdown",
@@ -1874,8 +1875,6 @@
                 "markdown"
             ],
             "time": "2016-10-29T18:58:20+00:00"
-=======
->>>>>>> origin/feature-add-elastic
         },
         {
             "name": "mongodb/mongodb",
@@ -2012,7 +2011,6 @@
                 "psr-3"
             ],
             "time": "2017-03-13T07:08:03+00:00"
-<<<<<<< HEAD
         },
         {
             "name": "nelmio/api-doc-bundle",
@@ -2155,8 +2153,6 @@
                 "crossdomain"
             ],
             "time": "2017-01-22T21:34:09+00:00"
-=======
->>>>>>> origin/feature-add-elastic
         },
         {
             "name": "paragonie/random_compat",
@@ -2205,7 +2201,6 @@
                 "random"
             ],
             "time": "2017-03-13T16:27:32+00:00"
-<<<<<<< HEAD
         },
         {
             "name": "phpcollection/phpcollection",
@@ -2304,8 +2299,6 @@
                 "type"
             ],
             "time": "2015-07-25T16:39:46+00:00"
-=======
->>>>>>> origin/feature-add-elastic
         },
         {
             "name": "psr/cache",
@@ -2399,8 +2392,6 @@
                 "psr-3"
             ],
             "time": "2016-10-10T12:19:37+00:00"
-<<<<<<< HEAD
-=======
         },
         {
             "name": "ruflin/elastica",
@@ -2458,7 +2449,6 @@
                 "search"
             ],
             "time": "2015-10-19T07:09:10+00:00"
->>>>>>> origin/feature-add-elastic
         },
         {
             "name": "sensio/distribution-bundle",
@@ -2514,7 +2504,6 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-<<<<<<< HEAD
             "version": "v3.0.25",
             "source": {
                 "type": "git",
@@ -2525,18 +2514,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/472b339cf0c82f3a033b29f85d9d9cada3cd1a9c",
                 "reference": "472b339cf0c82f3a033b29f85d9d9cada3cd1a9c",
-=======
-            "version": "v3.0.23",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "d3601fd5709168ace7a1ca6eefa2619a1632b7f7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/d3601fd5709168ace7a1ca6eefa2619a1632b7f7",
-                "reference": "d3601fd5709168ace7a1ca6eefa2619a1632b7f7",
->>>>>>> origin/feature-add-elastic
                 "shasum": ""
             },
             "require": {
@@ -2593,11 +2570,7 @@
                 "annotations",
                 "controllers"
             ],
-<<<<<<< HEAD
             "time": "2017-03-21T23:34:44+00:00"
-=======
-            "time": "2017-03-02T20:17:28+00:00"
->>>>>>> origin/feature-add-elastic
         },
         {
             "name": "sensiolabs/security-checker",
@@ -3096,7 +3069,6 @@
         },
         {
             "name": "symfony/swiftmailer-bundle",
-<<<<<<< HEAD
             "version": "v2.5.4",
             "source": {
                 "type": "git",
@@ -3107,18 +3079,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/8ab32ce31a7156621fb92e0466586186beb89759",
                 "reference": "8ab32ce31a7156621fb92e0466586186beb89759",
-=======
-            "version": "v2.5.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/swiftmailer-bundle.git",
-                "reference": "b59a70d03b948e29d070b6c4416b4a03af4748ec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/b59a70d03b948e29d070b6c4416b4a03af4748ec",
-                "reference": "b59a70d03b948e29d070b6c4416b4a03af4748ec",
->>>>>>> origin/feature-add-elastic
                 "shasum": ""
             },
             "require": {
@@ -3164,11 +3124,7 @@
             ],
             "description": "Symfony SwiftmailerBundle",
             "homepage": "http://symfony.com",
-<<<<<<< HEAD
             "time": "2017-03-21T21:47:36+00:00"
-=======
-            "time": "2017-03-02T16:47:57+00:00"
->>>>>>> origin/feature-add-elastic
         },
         {
             "name": "symfony/symfony",
@@ -3316,7 +3272,6 @@
         },
         {
             "name": "twig/twig",
-<<<<<<< HEAD
             "version": "v2.3.0",
             "source": {
                 "type": "git",
@@ -3327,18 +3282,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/twigphp/Twig/zipball/9718186a5df85a4f7917e78d3ffcabc204c75d25",
                 "reference": "9718186a5df85a4f7917e78d3ffcabc204c75d25",
-=======
-            "version": "v2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twigphp/Twig.git",
-                "reference": "29bb02dde09ff56291d30f7687eb8696918023af"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/29bb02dde09ff56291d30f7687eb8696918023af",
-                "reference": "29bb02dde09ff56291d30f7687eb8696918023af",
->>>>>>> origin/feature-add-elastic
                 "shasum": ""
             },
             "require": {
@@ -3353,11 +3296,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-<<<<<<< HEAD
                     "dev-master": "2.3-dev"
-=======
-                    "dev-master": "2.2-dev"
->>>>>>> origin/feature-add-elastic
                 }
             },
             "autoload": {
@@ -3392,7 +3331,6 @@
             "keywords": [
                 "templating"
             ],
-<<<<<<< HEAD
             "time": "2017-03-22T15:41:51+00:00"
         },
         {
@@ -3535,9 +3473,6 @@
                 "negotiation"
             ],
             "time": "2015-10-01T07:42:40+00:00"
-=======
-            "time": "2017-02-27T00:16:20+00:00"
->>>>>>> origin/feature-add-elastic
         }
     ],
     "packages-dev": [
