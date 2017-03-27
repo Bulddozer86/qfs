@@ -19,4 +19,5 @@ src/AppBundle
 tests
 /web/images/
 /web/media/
+frontend/node_modules/
 .idea
