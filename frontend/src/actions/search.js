@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-export function fetchSearchData() {
+export default function fetchSearchData() {
     const data = fetch('http://localhost:8000/', {
         method: 'GET',
         mode: 'cors'

@@ -9,7 +9,7 @@ import * as fetchSearchData from '../actions/search';
 
 class App extends Component {
     render() {
-        const { search } = this.props.fetchSearchData;
+        const { search } = this.props;
         return (
             <div className="col-lg-12">
                 <div className="well">
