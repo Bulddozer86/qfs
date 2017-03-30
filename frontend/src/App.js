@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from  'react-redux';
 
-// import List from './components/searchList';
-// import Form from './components/searchForm';
+import List from './components/searchList';
+import Form from './components/searchForm';
+
+import {bigActionCreator} from 'redux'
+import * as fetchSearchData from '../actions/search';
 
 class App extends Component {
     render() {
+        const { search } = this.props.fetchSearchData;
         return (
             <div className="col-lg-12">
                 <div className="well">
-                    <h1>Hello world</h1>
+                    <Form/>
+                    <List search={ search } />
                 </div>
             </div>
 
@@ -18,7 +23,9 @@ class App extends Component {
 }
 
 function mapStateToProps (state) {
-    return state
+    return {
+        search: state.searchData
+    }
 }
 
 export default connect(mapStateToProps)(App)
