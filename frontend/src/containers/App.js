@@ -1,41 +1,33 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import Page from '../components/Page'
-import * as pageActions from '../actions/PageActions'
-
-import {combineForms} from 'react-redux-form';
+import {Provider} from 'react-redux';
+import * as formActions from '../actions/formAction'
 
 import SearchForm from '../components/searchForm'
 
-const initialUser = {name: ''};
-
-const formStore = createStore(combineForms({
-  user: initialUser,
-}));
-
 class App extends Component {
   render() {
-    const {page} = this.props;
-    const {setSearchValue} = this.props.pageActions;
+    const formStore = this.props.form;
+    //const {setList} = this.props.formActions;
 
-    return <Provider store={ formStore }>
-      <SearchForm />
-    </Provider>
+    return (
+      <Provider store={ formStore }  >
+        <SearchForm />
+      </Provider>
+    )
   }
 }
 
 function mapStateToProps(state) {
   return {
-    page: state.page
+    form: state.searchForm
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    pageActions: bindActionCreators(pageActions, dispatch)
+    formActions: bindActionCreators(formActions, dispatch)
   }
 }
 

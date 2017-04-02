@@ -1,18 +1,32 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Control, Form } from 'react-redux-form';
+import React, {PropTypes, Component} from 'react'
+import {Control, Form} from 'react-redux-form';
+import {fetchSearchData} from '../actions/search'
 
-class SearchForm extends React.Component {
+class SearchForm extends Component {
   handleSubmit(val) {
+    fetchSearchData()
+      .then((data) => {
+        this.setState(state => {
+          state.list = data;
+          return state;
+        })
+      })
+      .catch((err) => {
+        console.error('err', err);
+      });
+
     // Do anything you want with the form value
-    console.log(val);
+    // const state = this.state;
+    // this.setState()
+    // console.log(this.state);
   }
 
   render() {
+    console.log(this.state);
     return (
       <Form model="user" onSubmit={(val) => this.handleSubmit(val)}>
         <label>Your name?</label>
-        <Control.text model=".name" />
+        <Control.text model=".name"/>
         <button>Submit!</button>
       </Form>
     );
