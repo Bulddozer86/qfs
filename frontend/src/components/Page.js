@@ -7,7 +7,7 @@ export default class Page extends Component {
 
   render() {
     const {value} = this.props;
-console.log(value);
+
     return <div>
       <p>
         <button onClick={::this.onBtnClick}>2016</button>

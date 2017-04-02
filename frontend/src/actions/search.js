@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import {SET_SEARCH_VALUE} from '../consts/page-consts'
 
 export default function fetchSearchData() {
     const data = fetch('http://localhost:8000/', {
@@ -7,7 +8,7 @@ export default function fetchSearchData() {
     }).then(res => res.json()).catch(err => err);
 
     return {
-        type: 'SET_SEARCH',
+        type: SET_SEARCH_VALUE,
         payload: data
     }
 }

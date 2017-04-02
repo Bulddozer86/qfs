@@ -1,25 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Control, Form } from 'react-redux-form';
 
-const Form = new React.createClass({
-    handleSubmit(e) {
-        e.preventDefault();
-        this.props.onSubmit(this.state);
-    },
+class SearchForm extends React.Component {
+  handleSubmit(val) {
+    // Do anything you want with the form value
+    console.log(val);
+  }
 
-    render() {
-        return (
-            <form className="form" name="searchForm" onSubmit={this.handleSubmit}>
-                <h4>className</h4>
-                <div className="input-group text-center">
-                    <input type="text" className="form-control input-lg"
-                           placeholder="Enter your email address"/>
-                    <span className="input-group-btn">
-                        <button className="btn btn-lg btn-primary" type="button">OK</button>
-                    </span>
-                </div>
-            </form>
-        )
-    }
-});
+  render() {
+    return (
+      <Form model="user" onSubmit={(val) => this.handleSubmit(val)}>
+        <label>Your name?</label>
+        <Control.text model=".name" />
+        <button>Submit!</button>
+      </Form>
+    );
+  }
+}
 
-export default Form;
+// No need to connect()!
+export default SearchForm;
