@@ -6,7 +6,7 @@ const initialState = {
   list: []
 };
 
-export  default  function formStore(state = initialState,  action) {
+export default function formStore(state = initialState, action) {
   console.log(action.type);
   return createStore(combineForms({
     user: state,

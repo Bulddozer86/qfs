@@ -6,7 +6,7 @@ class SearchForm extends Component {
   handleSubmit(val) {
     fetchSearchData()
       .then((data) => {
-        this.setState(state => {
+        this.props.setList(state => {
           state.list = data;
           return state;
         })
@@ -22,7 +22,6 @@ class SearchForm extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <Form model="user" onSubmit={(val) => this.handleSubmit(val)}>
         <label>Your name?</label>

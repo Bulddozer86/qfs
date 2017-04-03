@@ -9,17 +9,18 @@ import SearchForm from '../components/searchForm'
 class App extends Component {
   render() {
     const formStore = this.props.form;
-    //const {setList} = this.props.formActions;
-
+    console.log(formStore);
+    const {setList} = this.props.formActions;
     return (
-      <Provider store={ formStore }  >
-        <SearchForm />
+      <Provider store={ formStore } >
+        <SearchForm setList={setList} />
       </Provider>
     )
   }
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
     form: state.searchForm
   }
