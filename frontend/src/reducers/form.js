@@ -1,14 +1,13 @@
-import {createStore} from 'redux';
-import {combineForms} from 'react-redux-form'
-
 const initialState = {
-  name: '',
-  list: []
+    value: '',
+    list: []
 };
 
 export default function formStore(state = initialState, action) {
-  console.log(action.type);
-  return createStore(combineForms({
-    user: state,
-  }));
+    switch (action.type) {
+        case 'SET_LIST':
+            return {...state, list: action.payload};
+        default:
+            return state;
+    }
 }

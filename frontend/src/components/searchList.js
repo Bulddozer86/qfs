@@ -1,37 +1,20 @@
 import React, {Component} from 'react'
-// import {bigActionCreator} from 'redux'
-// import {connect} from 'react-redux'
-// import * as fetchSearchData from '../actions/search';
 
 class SearchList extends Component {
-    // constructor(props) {
-    //     super(props);
-    //
-    //     this.state = {
-    //         searchData: []
-    //     }
-    // };
+    constructor(props) {
+        super(props);
 
-    // componentDidMount() {
-    //     fetchSearchData()
-    //         .then((data) => {
-    //             this.setState(state => {
-    //                 state.searchData = data;
-    //                 return state;
-    //             })
-    //         })
-    //         .catch((err) => {
-    //             console.error('err', err);
-    //         });
-    // };
-
+        this.state = {
+            search: []
+        }
+    };
 
     render() {
+console.log('test ' + this.props.search);
         return (
             <table>
                 <tbody>
                 {this.props.search && this.props.search.map(s => {
-                    //console.log(s);
                     return (
                         <tr key={s.id}>
                             <td>{s.price}</td>
@@ -46,3 +29,5 @@ class SearchList extends Component {
         );
     }
 }
+
+export default SearchList;

@@ -1,36 +1,47 @@
 import React, {PropTypes, Component} from 'react'
-import {Control, Form} from 'react-redux-form';
 import {fetchSearchData} from '../actions/search'
 
 class SearchForm extends Component {
-  handleSubmit(val) {
-    fetchSearchData()
-      .then((data) => {
-        this.props.setList(state => {
-          state.list = data;
-          return state;
-        })
-      })
-      .catch((err) => {
-        console.error('err', err);
-      });
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: props.value,
+            list: props.list
+        };
 
-    // Do anything you want with the form value
-    // const state = this.state;
-    // this.setState()
-    // console.log(this.state);
-  }
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
 
-  render() {
-    return (
-      <Form model="user" onSubmit={(val) => this.handleSubmit(val)}>
-        <label>Your name?</label>
-        <Control.text model=".name"/>
-        <button>Submit!</button>
-      </Form>
-    );
-  }
+    handleSubmit(e) {
+        e.preventDefault();
+        fetchSearchData()
+          .then((data) => {
+            this.props.setList(data)
+          })
+          .catch((err) => {
+            console.error('err', err);
+          });
+    }
+
+    handleChange(event) {
+        this.setState({
+            value: event.target.value,
+            list: []
+        });
+    }
+
+    render() {
+        return (
+            <form name="search_form" onSubmit={this.handleSubmit}>
+                <label>
+                    Search object:
+                    <input type="text" value={this.state.value} onChange={this.handleChange}/>
+                </label>
+                <input type="submit" value="Ok"/>
+            </form>
+        );
+    }
 }
 
-// No need to connect()!
 export default SearchForm;
