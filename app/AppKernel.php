@@ -23,7 +23,9 @@ class AppKernel extends Kernel
           new Nelmio\CorsBundle\NelmioCorsBundle(),
           new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
           new JMS\SerializerBundle\JMSSerializerBundle(),
-          //new Liip\ImagineBundle\LiipImagineBundle(),
+          new Liip\ImagineBundle\LiipImagineBundle(),
+          new FOS\ElasticaBundle\FOSElasticaBundle(),
+          new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
@@ -31,8 +33,8 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
-            $bundles[] = new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle();
-            $bundles[] = new Liip\ImagineBundle\LiipImagineBundle();
+            //$bundles[] = new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle();
+            //$bundles[] = new Liip\ImagineBundle\LiipImagineBundle();
         }
 
         return $bundles;

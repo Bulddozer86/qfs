@@ -14,7 +14,7 @@ class FlatRepository extends DocumentRepository
 {
     public function findLatestItems()
     {
-        return $this->findBy(['date' => ['$gte' => mktime(date('H') - 2400)]]);
+        return $this->findBy(['date' => ['$gte' => mktime(date('H') - 24)]]);
     }
 
     public function findByHash($hash)
