@@ -23,6 +23,7 @@ class AppKernel extends Kernel
           new Nelmio\CorsBundle\NelmioCorsBundle(),
           new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
           new JMS\SerializerBundle\JMSSerializerBundle(),
+          new FOS\ElasticaBundle\FOSElasticaBundle(),
           //new Liip\ImagineBundle\LiipImagineBundle(),
         ];
 
